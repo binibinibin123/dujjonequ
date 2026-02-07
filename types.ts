@@ -24,9 +24,42 @@ export interface PlayerState {
     pistachio: number;
     goldLeaf: number;
   };
+  stats: {
+    totalClicks: number;
+    totalMoneyEarned: number;
+    failedUpgrades: number;
+  };
+  achievements: string[]; // IDs of unlocked achievements
+  tutorialCompleted: boolean;
+  upgrades: Record<string, number>; // upgradeId -> level
+  helpers: Record<string, number>; // helperId -> count
+  feverGauge: number; // 0 to 100
+  prestigeTickets: number; // For permanent multiplier
+  mastery: Record<number, number>; // level -> star count
 }
 
-export type Tab = 'GAME' | 'SHOP' | 'COLLECTION';
+export interface Upgrade {
+  id: string;
+  name: string;
+  description: string;
+  baseCost: number;
+  costMultiplier: number;
+  maxLevel: number;
+  icon: string;
+  type: 'CLICK_POWER' | 'CHANCE' | 'STOCK_MAX' | 'STOCK_SPEED';
+}
+
+export interface Helper {
+  id: string;
+  name: string;
+  description: string;
+  baseCost: number;
+  costMultiplier: number;
+  baseCPS: number; // Clicks Per Second contribution
+  icon: string;
+}
+
+export type Tab = 'GAME' | 'COLLECTION';
 
 export interface FloatingText {
   id: number;
