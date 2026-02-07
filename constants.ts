@@ -2,6 +2,7 @@ import { LevelData } from './types';
 
 export const MAX_LEVEL = 50;
 export const CLICK_REWARD_BASE = 10;
+export const CLICK_REWARD_EXPONENT = 1.65; // Balanced for 50 levels expansion
 
 export const LEVELS: LevelData[] = [
   {
@@ -658,6 +659,7 @@ export const LEVELS: LevelData[] = [
 ];
 
 export const ACHIEVEMENTS = [
+  // --- Click Achievements ---
   {
     id: 'CLICK_10',
     name: "초보 조리사",
@@ -673,12 +675,72 @@ export const ACHIEVEMENTS = [
     requirement: (stats: any) => stats.totalClicks >= 100,
   },
   {
+    id: 'CLICK_1000',
+    name: "근성 가이",
+    description: "디저트를 1,000번 탭했습니다.",
+    icon: "💪",
+    requirement: (stats: any) => stats.totalClicks >= 1000,
+  },
+  {
+    id: 'CLICK_10000',
+    name: "강철의 손가락",
+    description: "디저트를 10,000번 탭했습니다.",
+    icon: "🤞",
+    requirement: (stats: any) => stats.totalClicks >= 10000,
+  },
+  {
+    id: 'CLICK_50000',
+    name: "탭의 지배자",
+    description: "디저트를 50,000번 탭했습니다.",
+    icon: "⚡",
+    requirement: (stats: any) => stats.totalClicks >= 50000,
+  },
+
+  // --- Money Achievements ---
+  {
     id: 'MONEY_1000',
     name: "첫 매출",
     description: "총 1,000 부스러기를 벌었습니다.",
     icon: "💰",
     requirement: (stats: any) => stats.totalMoneyEarned >= 1000,
   },
+  {
+    id: 'MONEY_100K',
+    name: "동네 맛집",
+    description: "총 100,000 부스러기를 벌었습니다.",
+    icon: "🏠",
+    requirement: (stats: any) => stats.totalMoneyEarned >= 100000,
+  },
+  {
+    id: 'MONEY_1M',
+    name: "수입 정산",
+    description: "총 1,000,000 부스러기를 벌었습니다.",
+    icon: "💸",
+    requirement: (stats: any) => stats.totalMoneyEarned >= 1000000,
+  },
+  {
+    id: 'MONEY_100M',
+    name: "백만장자 파티시에",
+    description: "총 100,000,000 부스러기를 벌었습니다.",
+    icon: "💎",
+    requirement: (stats: any) => stats.totalMoneyEarned >= 100000000,
+  },
+  {
+    id: 'MONEY_1B',
+    name: "부의 끝판왕",
+    description: "총 1,000,000,000 부스러기를 벌었습니다.",
+    icon: "🏛️",
+    requirement: (stats: any) => stats.totalMoneyEarned >= 1000000000,
+  },
+  {
+    id: 'MONEY_1T',
+    name: "재벌 3세",
+    description: "총 1,000,000,000,000 부스러기를 벌었습니다.",
+    icon: "🌌",
+    requirement: (stats: any) => stats.totalMoneyEarned >= 1000000000000,
+  },
+
+  // --- Level Achievements ---
   {
     id: 'LEVEL_5',
     name: "중급 파티시에",
@@ -687,6 +749,89 @@ export const ACHIEVEMENTS = [
     requirement: (stats: any, level: number) => level >= 5,
   },
   {
+    id: 'LEVEL_10',
+    name: "두쫀쿠 장인",
+    description: "레벨 10에 도달했습니다.",
+    icon: "👑",
+    requirement: (stats: any, level: number) => level >= 10,
+  },
+  {
+    id: 'LEVEL_25',
+    name: "명예 셰프",
+    description: "레벨 25에 도달했습니다.",
+    icon: "🎖️",
+    requirement: (stats: any, level: number) => level >= 25,
+  },
+  {
+    id: 'LEVEL_50',
+    name: "초월한 존재",
+    description: "최종 단계인 레벨 50에 도달했습니다.",
+    icon: "🏆✨",
+    requirement: (stats: any, level: number) => level >= 50,
+  },
+
+  // --- Prestige Achievements ---
+  {
+    id: 'PRESTIGE_1',
+    name: "새로운 시작",
+    description: "처음으로 환생을 진행했습니다.",
+    icon: "♻️",
+    requirement: (stats: any, level: number, prestige: number) => prestige >= 1,
+  },
+  {
+    id: 'PRESTIGE_10',
+    name: "반복되는 신화",
+    description: "총 10개 이상의 전설의 티켓을 보유했습니다.",
+    icon: "🎫",
+    requirement: (stats: any, level: number, prestige: number) => prestige >= 10,
+  },
+  {
+    id: 'PRESTIGE_100',
+    name: "티켓 부자",
+    description: "총 100개 이상의 전설의 티켓을 보유했습니다.",
+    icon: "🎰",
+    requirement: (stats: any, level: number, prestige: number) => prestige >= 100,
+  },
+  {
+    id: 'PRESTIGE_1000',
+    name: "제국의 매각왕",
+    description: "총 1,000개 이상의 전설의 티켓을 보유했습니다.",
+    icon: "🏯",
+    requirement: (stats: any, level: number, prestige: number) => prestige >= 1000,
+  },
+
+  // --- Mastery Achievements ---
+  {
+    id: 'MASTERY_1',
+    name: "완벽주의자",
+    description: "처음으로 레시피 마스터리 별을 획득했습니다.",
+    icon: "⭐",
+    requirement: (stats: any, level: number, prestige: number, mastery: any) => Object.values(mastery).some((v: any) => v >= 1),
+  },
+  {
+    id: 'MASTERY_10',
+    name: "별 수집가",
+    description: "총 10개 이상의 마스터리 별을 획득했습니다.",
+    icon: "🌟",
+    requirement: (stats: any, level: number, prestige: number, mastery: any) => (Object.values(mastery) as number[]).reduce((a, b) => a + b, 0) >= 10,
+  },
+  {
+    id: 'MASTERY_30',
+    name: "그랜드 마스터",
+    description: "총 30개 이상의 마스터리 별을 획득했습니다.",
+    icon: "✨",
+    requirement: (stats: any, level: number, prestige: number, mastery: any) => (Object.values(mastery) as number[]).reduce((a, b) => a + b, 0) >= 30,
+  },
+  {
+    id: 'MASTERY_100',
+    name: "마스터리의 화신",
+    description: "총 100개 이상의 마스터리 별을 획득했습니다.",
+    icon: "🔮",
+    requirement: (stats: any, level: number, prestige: number, mastery: any) => (Object.values(mastery) as number[]).reduce((a, b) => a + b, 0) >= 100,
+  },
+
+  // --- Misc & Challenge ---
+  {
     id: 'FAIL_1',
     name: "실패는 성공의 어머니",
     description: "처음으로 강화에 실패했습니다.",
@@ -694,11 +839,46 @@ export const ACHIEVEMENTS = [
     requirement: (stats: any) => stats.failedUpgrades >= 1,
   },
   {
-    id: 'MASTER_10',
-    name: "두쫀쿠 장인",
-    description: "최종 단계(레벨 10)를 완성했습니다.",
-    icon: "👑",
-    requirement: (stats: any, level: number) => level >= 10,
+    id: 'FAIL_10',
+    name: "운이 나쁜 건 아닐거야",
+    description: "강화에 총 10번 실패했습니다.",
+    icon: "🌩️",
+    requirement: (stats: any) => stats.failedUpgrades >= 10,
+  },
+  {
+    id: 'FAIL_50',
+    name: "불운의 끝",
+    description: "강화에 총 50번 실패했습니다.",
+    icon: "🌪️",
+    requirement: (stats: any) => stats.failedUpgrades >= 50,
+  },
+  {
+    id: 'STOCK_OUT',
+    name: "완판 신화",
+    description: "재고를 0으로 만들었습니다.",
+    icon: "📦",
+    requirement: (stats: any, level: number, prestige: number, mastery: any, currentStock: number) => currentStock <= 0,
+  },
+  {
+    id: 'FEVER_TIME',
+    name: "흥이 난다!",
+    description: "처음으로 피버 모드를 발동했습니다.",
+    icon: "🏮",
+    requirement: (stats: any, level: number, prestige: number, mastery: any, currentStock: number, isFever: boolean) => isFever === true,
+  },
+  {
+    id: 'ALL_UNLOCKED',
+    name: "백과사전의 완성",
+    description: "모든 레시피(50단계)를 해금했습니다.",
+    icon: "📚",
+    requirement: (stats: any, level: number) => level >= 50,
+  },
+  {
+    id: 'ULTIMATE_GOAL',
+    name: "두쫀쿠의 끝",
+    description: "마지막 별까지 모두 모은 진정한 장인.",
+    icon: "🛸",
+    requirement: (stats: any, level: number, prestige: number, mastery: any) => (Object.values(mastery) as number[]).reduce((a, b) => a + b, 0) >= 150,
   }
 ];
 

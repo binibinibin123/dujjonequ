@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Home, ShoppingBag, Grid, Lock, CheckCircle, Zap, TrendingUp, Share2, AlertCircle, Save } from 'lucide-react';
-import { LEVELS, MAX_LEVEL, STOCK_REFRESH_TIME_MS, CLICK_REWARD_BASE, ACHIEVEMENTS, UPGRADES, HELPERS, FEVER_DURATION_MS, FEVER_GAUGE_CHARGE_PER_CLICK, FEVER_MULTIPLIER } from './constants';
+import { LEVELS, MAX_LEVEL, STOCK_REFRESH_TIME_MS, CLICK_REWARD_BASE, CLICK_REWARD_EXPONENT, ACHIEVEMENTS, UPGRADES, HELPERS, FEVER_DURATION_MS, FEVER_GAUGE_CHARGE_PER_CLICK, FEVER_MULTIPLIER } from './constants';
 import { PlayerState, Tab, FloatingText, Upgrade, Helper } from './types';
 import DessertVisual from './components/DessertVisual';
 import Tutorial from './components/Tutorial';
@@ -139,7 +139,14 @@ export default function App() {
 
     ACHIEVEMENTS.forEach(achievement => {
       if (!state.achievements.includes(achievement.id)) {
-        if (achievement.requirement(state.stats, state.currentLevel)) {
+        if (achievement.requirement(
+          state.stats,
+          state.currentLevel,
+          state.prestigeTickets,
+          state.mastery,
+          globalStock,
+          isFeverMode
+        )) {
           newlyUnlockedIds.push(achievement.id);
           lastAchievement = achievement;
         }
@@ -161,7 +168,18 @@ export default function App() {
       // Auto save on achievement
       setTimeout(() => saveNow(), 500);
     }
-  }, [state.stats, state.currentLevel, state.achievements, isLoaded, playSuccess, saveNow]);
+  }, [
+    state.stats,
+    state.currentLevel,
+    state.prestigeTickets,
+    state.mastery,
+    globalStock,
+    isFeverMode,
+    state.achievements,
+    isLoaded,
+    playSuccess,
+    saveNow
+  ]);
 
   // --- Auto Save ---
   useEffect(() => {
@@ -195,20 +213,25 @@ export default function App() {
 
     const interval = 1000;
     const timer = setInterval(() => {
-      const income = Math.ceil(totalCPS * prestigeMultiplier);
+      // Calculate reward for 1 tap at current level (matched with manual tap logic)
+      const feverMult = isFeverMode ? FEVER_MULTIPLIER : 1;
+      const levelMult = Math.pow(CLICK_REWARD_EXPONENT, state.currentLevel - 1);
+      const incomePerTap = Math.ceil(CLICK_REWARD_BASE * levelMult * clickMultiplier * prestigeMultiplier * feverMult);
+
+      const totalIncome = totalCPS * incomePerTap;
+
       setState(prev => ({
         ...prev,
-        money: prev.money + income,
+        money: prev.money + totalIncome,
         stats: {
           ...prev.stats,
-          totalMoneyEarned: prev.stats.totalMoneyEarned + income
+          totalMoneyEarned: prev.stats.totalMoneyEarned + totalIncome
         }
       }));
     }, interval);
 
-
     return () => clearInterval(timer);
-  }, [totalCPS]);
+  }, [totalCPS, state.currentLevel, prestigeMultiplier, clickMultiplier, isFeverMode]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -226,7 +249,7 @@ export default function App() {
   const handleTapDessert = (e: React.MouseEvent) => {
     const feverMult = isFeverMode ? FEVER_MULTIPLIER : 1;
     // Generate Income
-    const income = Math.ceil(CLICK_REWARD_BASE * (1.5 ** (state.currentLevel - 1)) * clickMultiplier * feverMult * prestigeMultiplier);
+    const income = Math.ceil(CLICK_REWARD_BASE * (Math.pow(CLICK_REWARD_EXPONENT, state.currentLevel - 1)) * clickMultiplier * feverMult * prestigeMultiplier);
 
     setState(prev => {
       let newFeverGauge = prev.feverGauge;
@@ -272,7 +295,7 @@ export default function App() {
       x: e.clientX,
       y: e.clientY,
       text: `+${income}`,
-      color: isFeverMode ? 'text-amber-400 scale-125' : 'text-yellow-400'
+      color: isFeverMode ? 'text-amber-300 scale-125 font-black' : 'text-yellow-400 font-bold'
     };
     setFloatingTexts(prev => [...prev, newText]);
     setTimeout(() => {
@@ -481,9 +504,9 @@ export default function App() {
         </div>
 
         <div className="flex flex-col items-end">
-          <div className="bg-black/60 px-3 py-1.5 rounded-full border border-white/10 flex items-center space-x-2 shadow-inner">
-            <span className="text-yellow-400 font-serif text-xs">₵</span>
-            <span className="font-mono font-bold text-sm tracking-tight">{formatNumber(state.money)}</span>
+          <div className="glass px-4 py-2 rounded-2xl flex items-center space-x-2 shadow-inner">
+            <span className="text-yellow-400 font-serif text-sm">₵</span>
+            <span className="font-mono font-bold text-lg tracking-tight">{formatNumber(state.money)}</span>
           </div>
           {totalCPS > 0 && (
             <span className="text-[9px] text-pistachio-400 font-black mt-0.5 tracking-tighter">
@@ -558,7 +581,7 @@ export default function App() {
       {floatingTexts.map(ft => (
         <div
           key={ft.id}
-          className={`fixed pointer-events-none text-2xl font-black font-serif ${ft.color} animate-float z-[100]`}
+          className={`fixed pointer-events-none text-2xl font-black font-serif ${ft.color} float-up z-[100]`}
           style={{ left: ft.x, top: ft.y, textShadow: '0 4px 12px rgba(0,0,0,0.6)' }}
         >
           {ft.text}
@@ -596,10 +619,10 @@ export default function App() {
             return (
               <div
                 key={level.level}
-                className={`rounded-xl p-4 flex items-center space-x-4 border transition-all
+                className={`rounded-2xl p-4 flex items-center space-x-4 transition-all duration-300
                   ${isUnlocked
-                    ? 'bg-gradient-to-r from-white/5 to-white/10 border-white/10 shadow-lg'
-                    : 'bg-black/20 border-white/5 opacity-50'
+                    ? 'glass border-white/10 shadow-lg'
+                    : 'bg-black/40 border border-white/5 opacity-50'
                   }`}
               >
                 <div className={`w-16 h-16 rounded-xl flex items-center justify-center text-3xl
@@ -705,8 +728,8 @@ export default function App() {
                 key={upgrade.id}
                 onClick={() => buyUpgrade(upgrade)}
                 disabled={!canAfford || isMax}
-                className={`w-full p-3 rounded-xl border flex items-center space-x-3 transition-all active:scale-[0.98]
-                  ${canAfford && !isMax ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-black/20 border-white/5 opacity-50 cursor-not-allowed'}`}
+                className={`w-full p-3 rounded-2xl flex items-center space-x-3 transition-all active:scale-[0.98]
+                  ${canAfford && !isMax ? 'glass border-white/10 hover:bg-white/10' : 'bg-black/40 border-white/5 opacity-50 cursor-not-allowed'}`}
               >
                 <div className="text-xl bg-white/5 p-2 rounded-lg">{upgrade.icon}</div>
                 <div className="flex-1 text-left">
@@ -746,8 +769,8 @@ export default function App() {
                 key={helper.id}
                 onClick={() => buyHelper(helper)}
                 disabled={!canAfford}
-                className={`w-full p-3 rounded-xl border flex items-center space-x-3 transition-all active:scale-[0.98]
-                  ${canAfford ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-black/20 border-white/5 opacity-50 cursor-not-allowed'}`}
+                className={`w-full p-3 rounded-2xl flex items-center space-x-3 transition-all active:scale-[0.98]
+                  ${canAfford ? 'glass border-white/10 hover:bg-white/10' : 'bg-black/40 border-white/5 opacity-50 cursor-not-allowed'}`}
               >
                 <div className="text-xl bg-white/5 p-2 rounded-lg">{helper.icon}</div>
                 <div className="flex-1 text-left">
@@ -804,7 +827,13 @@ export default function App() {
   );
 
   return (
-    <div className="w-full h-screen bg-[#1a1a1a] flex flex-col max-w-md mx-auto relative shadow-2xl overflow-hidden">
+    <div className={`w-full h-screen flex flex-col max-w-md mx-auto relative shadow-2xl overflow-hidden transition-all duration-700
+      ${isFeverMode ? 'bg-[#0f172a] fever-glow' : 'bg-[#0f172a]'}`}>
+
+      {/* Fever Pulse Overlay */}
+      {isFeverMode && (
+        <div className="absolute inset-0 pointer-events-none animate-fever-pulse z-0 opacity-40" />
+      )}
       {/* Background Ambience */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
       <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-chocolate-900/50 to-transparent pointer-events-none"></div>
@@ -860,7 +889,7 @@ export default function App() {
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 h-14 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-2xl flex items-center justify-around z-50 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <nav className="absolute bottom-6 left-1/2 -translate-x-1/2 w-52 h-14 glass rounded-2xl flex items-center justify-around z-50">
         <button
           onClick={() => setActiveTab('GAME')}
           className={`flex flex-col items-center justify-center w-12 h-10 rounded-xl transition-all ${activeTab === 'GAME' ? 'text-pistachio-400' : 'text-white/40 hover:text-white/70'}`}
