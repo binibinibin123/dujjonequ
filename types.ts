@@ -12,6 +12,7 @@ export interface LevelData {
     accentColor?: string; // Secondary color
     texture?: string; // Optional texture description
     particles?: string; // emoji
+    image?: string; // Custom pixel art image path
   };
 }
 

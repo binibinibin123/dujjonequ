@@ -7,6 +7,8 @@ import Tutorial from './components/Tutorial';
 import { useSaveGame } from './hooks/useSaveGame';
 import { useSound } from './hooks/useSound';
 import { Trophy, ArrowUpCircle, Users } from 'lucide-react';
+import EffectsLayer from './components/EffectsLayer';
+import { AnimatePresence, motion } from 'framer-motion';
 
 // Utility for formatting numbers
 const formatNumber = (num: number) => {
@@ -80,6 +82,7 @@ export default function App() {
   const [lastActionTime, setLastActionTime] = useState(0);
   const [showTutorial, setShowTutorial] = useState(false);
   const [activeAchievement, setActiveAchievement] = useState<any>(null);
+  const [effectTrigger, setEffectTrigger] = useState(0); // Counter to trigger effects
 
   // Refs for animation loops
   const textIdCounter = useRef(0);
@@ -337,7 +340,9 @@ export default function App() {
           ? prev.unlockedLevels
           : [...prev.unlockedLevels, prev.currentLevel + 1]
       }));
+
       setShowLevelUp(true);
+      setEffectTrigger(prev => prev + 1); // Trigger particle effect
       setTimeout(() => setShowLevelUp(false), 2000);
       // Sound & Save after level up
       playSuccess();
@@ -462,6 +467,9 @@ export default function App() {
           : [...prev.unlockedLevels, nextLvl]
       };
     });
+    setEffectTrigger(prev => prev + 1); // Trigger effect on debug level up too
+    setShowLevelUp(true);
+    setTimeout(() => setShowLevelUp(false), 2000);
   };
 
   // --- Renders ---
@@ -536,12 +544,27 @@ export default function App() {
 
         {showLevelUp && (
           <div className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none">
-            <div className="text-4xl font-black text-white drop-shadow-[0_0_20px_rgba(255,215,0,0.9)] animate-pop">
-              대성공!
-            </div>
+            <AnimatePresence>
+              <motion.div
+                initial={{ scale: 0, rotate: -20, opacity: 0 }}
+                animate={{ scale: [0, 1.2, 1], rotate: 0, opacity: 1 }}
+                exit={{ scale: 2, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="text-4xl font-black text-white drop-shadow-[0_0_20px_rgba(255,215,0,0.9)] text-center"
+              >
+                <div className="text-6xl mb-2">🎉</div>
+                <div>대성공!</div>
+                <div className="text-xl text-yellow-300 mt-2 font-bold">LEVEL UP!</div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         )}
       </div>
+
+      <EffectsLayer
+        levelColor={currentLevelData.visualParams.color || '#FCD34D'}
+        trigger={effectTrigger}
+      />
 
       <div className="w-full">
         {nextLevelData ? (
@@ -576,6 +599,16 @@ export default function App() {
             <span className="text-gold-300 font-black text-xs uppercase tracking-widest">✨ 궁극의 마스터 도달 ✨</span>
           </div>
         )}
+      </div>
+
+      {/* DEBUG BUTTON */}
+      <div className="absolute top-2 left-2 z-50 opacity-50 hover:opacity-100 transition-opacity">
+        <button
+          onClick={debugForceLevelUp}
+          className="bg-red-500/20 hover:bg-red-500 text-red-200 text-[10px] font-bold px-2 py-1 rounded border border-red-500/50"
+        >
+          [DEBUG] NEXT LEVEL
+        </button>
       </div>
 
       {floatingTexts.map(ft => (

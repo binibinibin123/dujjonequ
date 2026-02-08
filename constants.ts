@@ -15,7 +15,8 @@ export const LEVELS: LevelData[] = [
       stage: 'KATAIFI',
       color: 'bg-amber-100', // Starting raw color
       accentColor: 'bg-amber-400', // Toasted color
-      particles: '🔥'
+      particles: '🔥',
+      image: '/assets/desserts/1.png'
     }
   },
   {
@@ -28,7 +29,8 @@ export const LEVELS: LevelData[] = [
       stage: 'PISTACHIO',
       color: 'bg-lime-500',
       accentColor: 'bg-lime-300',
-      particles: '🥜'
+      particles: '🥜',
+      image: '/assets/desserts/2.png'
     }
   },
   {
@@ -41,7 +43,8 @@ export const LEVELS: LevelData[] = [
       stage: 'MARSHMALLOW',
       color: 'bg-white',
       accentColor: 'bg-stone-100',
-      particles: '☁️'
+      particles: '☁️',
+      image: '/assets/desserts/3.png'
     }
   },
   {
@@ -54,7 +57,8 @@ export const LEVELS: LevelData[] = [
       stage: 'WRAPPING',
       color: 'bg-stone-200',
       accentColor: 'bg-lime-600', // Inner color showing through
-      particles: '🥣'
+      particles: '🥣',
+      image: '/assets/desserts/4.png'
     }
   },
   {
@@ -67,7 +71,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#3E2723]',
       accentColor: 'bg-[#5D4037]',
-      particles: '✨'
+      particles: '✨',
+      image: '/assets/desserts/5.png'
     }
   },
   // Extended levels for gameplay depth (Quality enhancements)
@@ -81,7 +86,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#3E2723]',
       accentColor: 'bg-[#5D4037]',
-      particles: '❄️'
+      particles: '❄️',
+      image: '/assets/desserts/6.png'
     }
   },
   {
@@ -94,7 +100,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#3E2723]',
       accentColor: 'bg-yellow-400', // Gold
-      particles: '👑'
+      particles: '👑',
+      image: '/assets/desserts/7.png'
     }
   },
   {
@@ -107,7 +114,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#281815]',
       accentColor: 'bg-yellow-400',
-      particles: '🎁'
+      particles: '🎁',
+      image: '/assets/desserts/8.png'
     }
   },
   {
@@ -120,7 +128,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#281815]',
       accentColor: 'bg-gradient-to-r from-purple-500 to-pink-500', // Mystic aura
-      particles: '🔥'
+      particles: '🔥',
+      image: '/assets/desserts/9.png'
     }
   },
   {
@@ -133,7 +142,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-black',
       accentColor: 'bg-gold-500',
-      particles: '💎'
+      particles: '💎',
+      image: '/assets/desserts/10.png'
     }
   },
   {
@@ -146,7 +156,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-black',
       accentColor: 'bg-blue-400',
-      particles: '🌍'
+      particles: '🌍',
+      image: '/assets/desserts/11.png'
     }
   },
   {
@@ -159,7 +170,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#000033]',
       accentColor: 'bg-indigo-300',
-      particles: '🚀'
+      particles: '🚀',
+      image: '/assets/desserts/12.png'
     }
   },
   {
@@ -172,7 +184,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-gray-900',
       accentColor: 'bg-cyan-400',
-      particles: '🧪'
+      particles: '🧪',
+      image: '/assets/desserts/13.png'
     }
   },
   {
@@ -185,7 +198,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#3E2723]',
       accentColor: 'bg-amber-700',
-      particles: '📜'
+      particles: '📜',
+      image: '/assets/desserts/14.png'
     }
   },
   {
@@ -198,7 +212,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#1a2e1a]',
       accentColor: 'bg-emerald-400',
-      particles: '🐉'
+      particles: '🐉',
+      image: '/assets/desserts/15.png'
     }
   },
   {
@@ -211,7 +226,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-sky-50',
       accentColor: 'bg-white',
-      particles: '🎐'
+      particles: '🎐',
+      image: '/assets/desserts/16.png'
     }
   },
   {
@@ -224,7 +240,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#050505]',
       accentColor: 'bg-purple-900',
-      particles: '🌌'
+      particles: '🌌',
+      image: '/assets/desserts/17.png'
     }
   },
   {
@@ -237,7 +254,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#ffebf0]',
       accentColor: 'bg-pink-300',
-      particles: '⏳'
+      particles: '⏳',
+      image: '/assets/desserts/18.png'
     }
   },
   {
@@ -250,7 +268,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-white',
       accentColor: 'bg-yellow-200',
-      particles: '⚡'
+      particles: '⚡',
+      image: '/assets/desserts/19.png'
     }
   },
   {
@@ -263,7 +282,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500',
       accentColor: 'bg-white',
-      particles: '♾️'
+      particles: '♾️',
+      image: '/assets/desserts/20.png'
     }
   },
   {
@@ -276,7 +296,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#001f3f]',
       accentColor: 'bg-teal-300',
-      particles: '🌌'
+      particles: '🌌',
+      image: '/assets/desserts/21.png'
     }
   },
   {
@@ -289,7 +310,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-white',
       accentColor: 'bg-blue-100',
-      particles: '💎'
+      particles: '💎',
+      image: '/assets/desserts/22.png'
     }
   },
   {
@@ -302,7 +324,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#ff4500]',
       accentColor: 'bg-yellow-500',
-      particles: '🔥'
+      particles: '🔥',
+      image: '/assets/desserts/23.png'
     }
   },
   {
@@ -315,7 +338,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#002b36]',
       accentColor: 'bg-cyan-200',
-      particles: '🐚'
+      particles: '🐚',
+      image: '/assets/desserts/24.png'
     }
   },
   {
@@ -328,7 +352,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#4b0082]',
       accentColor: 'bg-pink-400',
-      particles: '🌙'
+      particles: '🌙',
+      image: '/assets/desserts/25.png'
     }
   },
   {
@@ -341,7 +366,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-gray-800',
       accentColor: 'bg-yellow-200',
-      particles: '⭐'
+      particles: '⭐',
+      image: '/assets/desserts/26.png'
     }
   },
   {
@@ -354,7 +380,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#e5e4e2]',
       accentColor: 'bg-white',
-      particles: '✨'
+      particles: '✨',
+      image: '/assets/desserts/27.png'
     }
   },
   {
@@ -367,7 +394,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-black',
       accentColor: 'bg-red-600',
-      particles: '👑'
+      particles: '👑',
+      image: '/assets/desserts/28.png'
     }
   },
   {
@@ -380,7 +408,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#1b4d3e]',
       accentColor: 'bg-lime-400',
-      particles: '🍏'
+      particles: '🍏',
+      image: '/assets/desserts/29.png'
     }
   },
   {
@@ -393,7 +422,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-gradient-to-br from-yellow-400 via-amber-600 to-yellow-300',
       accentColor: 'bg-white',
-      particles: '⚜️'
+      particles: '⚜️',
+      image: '/assets/desserts/30.png'
     }
   },
   {
@@ -406,7 +436,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#ff00ff]',
       accentColor: 'bg-cyan-300',
-      particles: '☁️'
+      particles: '☁️',
+      image: '/assets/desserts/31.png'
     }
   },
   {
@@ -419,7 +450,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#191970]',
       accentColor: 'bg-white',
-      particles: '🌌'
+      particles: '🌌',
+      image: '/assets/desserts/32.png'
     }
   },
   {
@@ -432,7 +464,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-black',
       accentColor: 'bg-purple-900',
-      particles: '🌑'
+      particles: '🌑',
+      image: '/assets/desserts/33.png'
     }
   },
   {
@@ -445,7 +478,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#ffdf00]',
       accentColor: 'bg-orange-500',
-      particles: '💥'
+      particles: '💥',
+      image: '/assets/desserts/34.png'
     }
   },
   {
@@ -458,7 +492,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-white/10',
       accentColor: 'bg-rainbow',
-      particles: '🌈'
+      particles: '🌈',
+      image: '/assets/desserts/35.png'
     }
   },
   {
@@ -471,7 +506,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#0a0a0a]',
       accentColor: 'bg-blue-600',
-      particles: '🌀'
+      particles: '🌀',
+      image: '/assets/desserts/36.png'
     }
   },
   {
@@ -484,7 +520,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#ff007f]',
       accentColor: 'bg-indigo-200',
-      particles: '🛸'
+      particles: '🛸',
+      image: '/assets/desserts/37.png'
     }
   },
   {
@@ -497,7 +534,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-[#483d8b]',
       accentColor: 'bg-yellow-100',
-      particles: '✨'
+      particles: '✨',
+      image: '/assets/desserts/38.png'
     }
   },
   {
@@ -510,7 +548,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-black/80',
       accentColor: 'bg-gray-500',
-      particles: '🌫️'
+      particles: '🌫️',
+      image: '/assets/desserts/39.png'
     }
   },
   {
@@ -523,7 +562,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-black',
       accentColor: 'bg-orange-700',
-      particles: '🕳️'
+      particles: '🕳️',
+      image: '/assets/desserts/40.png'
     }
   },
   {
@@ -536,7 +576,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-blue-100',
       accentColor: 'bg-yellow-300',
-      particles: '⚡'
+      particles: '⚡',
+      image: '/assets/desserts/41.png'
     }
   },
   {
@@ -549,7 +590,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-amber-100',
       accentColor: 'bg-amber-600',
-      particles: '🍖'
+      particles: '🍖',
+      image: '/assets/desserts/42.png'
     }
   },
   {
@@ -562,7 +604,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-green-900',
       accentColor: 'bg-green-400',
-      particles: '🌳'
+      particles: '🌳',
+      image: '/assets/desserts/43.png'
     }
   },
   {
@@ -575,7 +618,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-blue-500',
       accentColor: 'bg-white',
-      particles: '🔱'
+      particles: '🔱',
+      image: '/assets/desserts/44.png'
     }
   },
   {
@@ -588,7 +632,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-zinc-800',
       accentColor: 'bg-zinc-400',
-      particles: '⌛'
+      particles: '⌛',
+      image: '/assets/desserts/45.png'
     }
   },
   {
@@ -601,7 +646,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-gray-100',
       accentColor: 'bg-gray-300',
-      particles: '⚛️'
+      particles: '⚛️',
+      image: '/assets/desserts/46.png'
     }
   },
   {
@@ -614,7 +660,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-gradient-to-r from-blue-500 via-purple-500 to-red-500',
       accentColor: 'bg-white',
-      particles: '🔀'
+      particles: '🔀',
+      image: '/assets/desserts/47.png'
     }
   },
   {
@@ -627,7 +674,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-red-50/50',
       accentColor: 'bg-red-600',
-      particles: '🧵'
+      particles: '🧵',
+      image: '/assets/desserts/48.png'
     }
   },
   {
@@ -640,7 +688,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-white',
       accentColor: 'bg-black',
-      particles: '☯️'
+      particles: '☯️',
+      image: '/assets/desserts/49.png'
     }
   },
   {
@@ -653,7 +702,8 @@ export const LEVELS: LevelData[] = [
       stage: 'FINISHED',
       color: 'bg-gradient-to-br from-gold-300 via-white to-gold-300',
       accentColor: 'bg-amber-200',
-      particles: '✨🏆✨'
+      particles: '✨🏆✨',
+      image: '/assets/desserts/50.png'
     }
   },
 ];
